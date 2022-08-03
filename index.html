@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
+  
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Overpass', sans-serif;
+      margin: 0;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: center;
+
+      background-color: hsl(216, 12%, 8%);
+    }
+
+    #main {
+      width: 340px;
+      padding: 35px 25px;
+      border-radius: 25px;
+
+      background-color: hsl(213, 19%, 18%);
+    }
+
+    #rating {
+      display: none;
+      flex-flow: column nowrap;
+      justify-content: space-around;
+      align-items: flex-start;
+    }
+
+    #rating.current {
+      display: flex;
+    }
+
+    #star {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background-color: hsl(211, 19%, 22%);
+      background-image: url("./images/icon-star.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    #howdidwedo {
+      padding: 25px 0 10px 0;
+      font-size: 27px;
+      font-weight: 700;
+      color: white;
+    }
+
+    #letusknow {
+      font-size: 15px;
+      font-weight: 300;
+      color: hsl(216, 12%, 54%);
+    }
+
+    #ratings {
+      padding: 25px 0;
+      width: 100%;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #ratings button {
+      height: 47px;
+      width: 47px;
+      border: none;
+      border-radius: 50%;
+      background-color: hsl(211, 19%, 22%);
+      color: hsl(216, 12%, 54%);
+      font-weight: 700;
+    }
+    #ratings button.current {
+      background-color: hsl(216, 12%, 54%);
+      color: white;
+    }
+    #ratings button:hover {
+      cursor: pointer;
+      background-color: hsl(25, 97%, 53%);
+      color: white;
+    }
+
+    #submit {
+      font-size: 29;
+      font-weight: 700;
+      width: 100%;
+      padding: 13px;
+      border-radius: 25px;
+      border: none;
+      background-color: hsl(25, 97%, 53%);
+      color: white;
+    }
+    #submit:hover {
+      cursor: pointer;
+      color: hsl(25, 97%, 53%);
+      background: white;
+      font-weight: 700;
+    }
+
+    #thanks {
+      display: none;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #thanks.current {
+      display: flex;
+    }
+
+    #youselected {
+      margin: 40px 0;
+      background-color: hsl(211, 19%, 22%);
+      color: hsl(25, 97%, 53%);
+      padding: 5px 15px;
+      border-radius: 25px;
+      font-size: 15px;
+    }
+
+    #thankyou {
+      font-size: 25px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    #appreciate {
+      font-size: 15px;
+      color: hsl(217, 12%, 63%);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="main">
+    <div id="rating" class="current">
+      <div id="star"></div>
+      <div id="howdidwedo">How did we do?</div>
+      <div id="letusknow">
+        Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!
+      </div>
+      <div id="ratings">
+        <button class="rateBtn" onclick="setRating(1, this);">1</button>
+        <button class="rateBtn" onclick="setRating(2, this);">2</button>
+        <button class="rateBtn" onclick="setRating(3, this);">3</button>
+        <button class="rateBtn" onclick="setRating(4, this);">4</button>
+        <button class="rateBtn" onclick="setRating(5, this);">5</button>
+      </div>
+      <button id="submit" onclick="submit();">SUBMIT</button>
+    </div>
+    <div id="thanks">
+      <img id="phone" src="./images/illustration-thank-you.svg">
+      <div id="youselected">
+        You selected <span id="selectedrating"></span> out of 5
+      </div>
+
+      <div id="thankyou">
+        Thank you!
+      </div>
+
+      <div id="appreciate">
+        We appreciate you taking the time to give a rating. If you ever need more support, don’t hesitate to get in touch!
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let rating;
+
+    function setRating(n, btn) {
+      const current = document.querySelector("#ratings button.rateBtn.current");
+      if (current)
+        current.classList.remove("current");
+      
+      btn.classList.add("current");
+      rating = n;
+    }
+
+    function submit() {
+      if (rating != undefined) {
+        document.querySelector("#selectedrating").innerText = rating;
+        document.querySelector("#rating").classList.remove("current");
+        document.querySelector("#thanks").classList.add("current");
+      }
+    }
+  </script>
+</body>
+</html>
